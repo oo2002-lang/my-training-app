@@ -122,8 +122,7 @@ function de(exerciseId: string, sortOrder: number, section: DayExercise['section
   return { id: generateId(), exerciseId, sortOrder, section, supersetGroup: null, notes, sets };
 }
 
-export function seedPrograms(): Program[] {
-  const exercises = seedExercises();
+export function seedPrograms(exercises: Exercise[]): Program[] {
   const f = (slug: string) => exercises.find(e => e.slug === slug)!.id;
 
   function buildWeeks(days: TrainingDay[], numWeeks: number, deloadLast = true): Week[] {

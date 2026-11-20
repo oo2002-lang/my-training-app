@@ -3,7 +3,7 @@
 import { Exercise, Program, Session, E1RMRecord, PRRecord, WellnessCheckin, UserSettings } from './types';
 import { seedExercises, seedPrograms } from './seed';
 
-const SCHEMA_VERSION = 4;
+const SCHEMA_VERSION = 5;
 
 const KEYS = {
   exercises: 'ironlog_exercises',
@@ -45,8 +45,9 @@ export const store = {
     if (ver && Number(ver) >= SCHEMA_VERSION) return;
     // Wipe old schema and re-seed with sport-specific data
     Object.values(KEYS).forEach(k => localStorage.removeItem(k));
-    set(KEYS.exercises, seedExercises());
-    set(KEYS.programs, seedPrograms());
+    const exercises = seedExercises();
+    set(KEYS.exercises, exercises);
+    set(KEYS.programs, seedPrograms(exercises));
     set(KEYS.sessions, []);
     set(KEYS.e1rmHistory, []);
     set(KEYS.prs, []);
