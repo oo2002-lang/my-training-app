@@ -390,6 +390,18 @@ function WorkoutInner() {
             </div>
           )}
 
+          {/* No-equipment alternatives */}
+          {activeExInfo.alternatives && activeExInfo.alternatives.length > 0 && (
+            <details className="rounded-lg border border-zinc-700 bg-zinc-800/50 px-3 py-2">
+              <summary className="cursor-pointer text-xs text-zinc-500">🔄 No {activeExInfo.equipment ?? 'equipment'}? Alternatives</summary>
+              <ul className="mt-1.5 space-y-1">
+                {activeExInfo.alternatives.map((alt, i) => (
+                  <li key={i} className="text-xs text-zinc-400">• {alt}</li>
+                ))}
+              </ul>
+            </details>
+          )}
+
           {/* Target info */}
           {currentDayExercise.sets[active.setIndex] && (() => {
             const ps = currentDayExercise.sets[active.setIndex];

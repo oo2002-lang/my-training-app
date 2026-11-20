@@ -10,6 +10,7 @@ export interface Exercise {
   equipment?: string;
   sport: 'long_jump' | 'cb_football' | 'both';
   cues?: string;
+  alternatives?: string[];
 }
 
 export interface PrescribedSet {

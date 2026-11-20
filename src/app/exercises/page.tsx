@@ -203,6 +203,9 @@ export default function ExercisesPage() {
                     {ex.primaryMuscles.length > 0 && <span>{ex.primaryMuscles.slice(0, 3).join(', ')}</span>}
                   </div>
                   {ex.cues && <p className="mt-1 text-xs text-zinc-600 italic">{ex.cues}</p>}
+                  {ex.alternatives && ex.alternatives.length > 0 && (
+                    <p className="mt-0.5 text-xs text-zinc-600">🔄 {ex.alternatives.join(' · ')}</p>
+                  )}
                 </div>
                 <div className="text-right ml-2 shrink-0">
                   {pr && <p className="text-sm font-bold text-green-400">PR: {pr}</p>}

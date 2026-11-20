@@ -3,7 +3,7 @@
 import { Exercise, Program, Session, E1RMRecord, PRRecord, WellnessCheckin, UserSettings } from './types';
 import { seedExercises, seedPrograms } from './seed';
 
-const SCHEMA_VERSION = 5;
+const SCHEMA_VERSION = 6;
 
 const KEYS = {
   exercises: 'ironlog_exercises',
