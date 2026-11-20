@@ -8,6 +8,7 @@ import { calculateE1RM, createE1RMRecord, resolveWeight } from '@/lib/e1rm';
 import { generateId, formatWeight, formatDuration } from '@/lib/utils';
 import RPESelector from '@/components/RPESelector';
 import RestTimer from '@/components/RestTimer';
+import ExerciseAnimation from '@/components/ExerciseAnimation';
 
 export default function WorkoutPage() {
   return <Suspense><WorkoutInner /></Suspense>;
@@ -359,28 +360,33 @@ function WorkoutInner() {
       {/* Current exercise */}
       {active && currentDayExercise && activeExInfo && (
         <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 space-y-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className={`rounded px-1.5 py-0.5 text-xs font-medium ${
-                activeExInfo.category === 'sprint' ? 'bg-red-900/50 text-red-400' :
-                activeExInfo.category === 'plyo' ? 'bg-orange-900/50 text-orange-400' :
-                activeExInfo.category === 'jump_drill' ? 'bg-purple-900/50 text-purple-400' :
-                activeExInfo.category === 'cb_drill' ? 'bg-blue-900/50 text-blue-400' :
-                activeExInfo.category === 'agility' ? 'bg-cyan-900/50 text-cyan-400' :
-                activeExInfo.category === 'strength' ? 'bg-amber-900/50 text-amber-400' :
-                'bg-zinc-800 text-zinc-400'
-              }`}>
-                {activeExInfo.category.replace(/_/g, ' ')}
-              </span>
-              <span className="text-xs uppercase tracking-wider text-zinc-600">
-                {currentDayExercise.section}
-              </span>
+          <div className="flex items-start gap-3">
+            <div className="shrink-0 rounded-lg bg-zinc-800/50 p-1">
+              <ExerciseAnimation slug={activeExInfo.slug} />
             </div>
-            <p className="mt-1 text-lg font-bold">{activeExInfo.name}</p>
-            <p className="text-sm text-zinc-500">
-              Set {active.setIndex + 1} of {currentDayExercise.sets.length}
-              {active.isWarmup && <span className="ml-1 text-amber-400">(Warm-up)</span>}
-            </p>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className={`rounded px-1.5 py-0.5 text-xs font-medium ${
+                  activeExInfo.category === 'sprint' ? 'bg-red-900/50 text-red-400' :
+                  activeExInfo.category === 'plyo' ? 'bg-orange-900/50 text-orange-400' :
+                  activeExInfo.category === 'jump_drill' ? 'bg-purple-900/50 text-purple-400' :
+                  activeExInfo.category === 'cb_drill' ? 'bg-blue-900/50 text-blue-400' :
+                  activeExInfo.category === 'agility' ? 'bg-cyan-900/50 text-cyan-400' :
+                  activeExInfo.category === 'strength' ? 'bg-amber-900/50 text-amber-400' :
+                  'bg-zinc-800 text-zinc-400'
+                }`}>
+                  {activeExInfo.category.replace(/_/g, ' ')}
+                </span>
+                <span className="text-xs uppercase tracking-wider text-zinc-600">
+                  {currentDayExercise.section}
+                </span>
+              </div>
+              <p className="mt-1 text-lg font-bold">{activeExInfo.name}</p>
+              <p className="text-sm text-zinc-500">
+                Set {active.setIndex + 1} of {currentDayExercise.sets.length}
+                {active.isWarmup && <span className="ml-1 text-amber-400">(Warm-up)</span>}
+              </p>
+            </div>
           </div>
 
           {/* Coaching cues */}
